@@ -82,6 +82,7 @@ class _Login extends State<Login> {
                     child: TextFormField(
                       controller: password,
                       style: TextStyle(color: Colors.black, fontSize: 18),
+                      obscureText: true,
                       validator: (val) =>
                           val.isEmpty ? "*Password must be filled" : null,
                       decoration: InputDecoration(
@@ -120,8 +121,7 @@ class _Login extends State<Login> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            Home(nama: nama)),
+                                        builder: (context) => Home(nama: nama)),
                                   );
                                 }
                               },
