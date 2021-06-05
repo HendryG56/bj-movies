@@ -226,6 +226,15 @@ class _HomeState extends State<Home> {
   String nama;
   String moviename;
 
+  final List<String> newMovies = <String>[
+    'Spiderman'
+    'Parasite'
+    'Men In Black'
+    'Friendzone'
+    'Alladin'
+  ];
+  final List<int> colorCodes = <int>[600, 500, 400, 300, 200];
+
   _HomeState(this.nama);
 
   int _currentState = 0;
@@ -376,7 +385,7 @@ class _HomeState extends State<Home> {
                   )),
             ],
           ),
-          Column(children: <Widget>[
+          /* Column(children: <Widget>[
             ButtonTheme(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0)),
@@ -402,7 +411,46 @@ class _HomeState extends State<Home> {
                         ),
                       ))),
             )
-          ])
+          ]) */
+          Expanded(
+            flex: 1,
+            child: DefaultTabController(
+              length: 2,
+              child: Scaffold(
+                appBar: TabBar(
+                  indicatorColor: Colors.black,
+                  tabs: [
+                    Tab(
+                      child: Text("New Movie",
+                        style: TextStyle(color: Colors.black)
+                      ),
+                    ),
+                    Tab(
+                      child: Text("Popular Movie",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+                body: TabBarView(
+                  children: [
+                    ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: newMovies.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          height: 50,
+                          color: Colors.blue[colorCodes[index]],
+                          child: Center(child: Text('${newMovies[index]}')),
+                        );
+                      }
+                    ),
+                    Icon(Icons.directions_bike),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
