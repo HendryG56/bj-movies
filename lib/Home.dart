@@ -227,11 +227,17 @@ class _HomeState extends State<Home> {
   String moviename;
 
   final List<String> newMovies = <String>[
-    'Spiderman'
-    'Parasite'
-    'Men In Black'
-    'Friendzone'
+    'Spiderman',
+    'Parasite',
+    'Men In Black',
+    'Friendzone',
     'Alladin'
+  ];
+  final List<String> popularMovies = <String>[
+    'Doraemon',
+    'Captain Marvel',
+    'Avengers',
+    'Angel Has Fallen'
   ];
   final List<int> colorCodes = <int>[600, 500, 400, 300, 200];
 
@@ -304,6 +310,20 @@ class _HomeState extends State<Home> {
             (image) => _carouselSliderMapBuilder(image),
           )
           .toList(),
+    );
+  }
+
+  Widget _imageCard( index, onPress) {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Text(newMovies[index]),
+          TextButton(
+            child: const Text('Press'),
+            onPressed: onPress,
+          ),
+        ],
+      )
     );
   }
 
@@ -421,7 +441,7 @@ class _HomeState extends State<Home> {
                   indicatorColor: Colors.black,
                   tabs: [
                     Tab(
-                      child: Text("New Movie",
+                      child: Text("New Movies",
                         style: TextStyle(color: Colors.black)
                       ),
                     ),
@@ -438,10 +458,16 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(8),
                       itemCount: newMovies.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: 50,
-                          color: Colors.blue[colorCodes[index]],
-                          child: Center(child: Text('${newMovies[index]}')),
+                        return _imageCard(
+                          index,
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MovieDetail(
+                                      namamoviedetail: nama, namamovie: newMovies[index])),
+                            );
+                          }
                         );
                       }
                     ),
