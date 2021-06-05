@@ -5,6 +5,7 @@ import 'package:projectapp/Login.dart';
 import 'package:projectapp/MovieDetail.dart';
 import 'MovieDetail.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'Model/Movie.dart';
 
 // class Home_ extends StatelessWidget {
 //   String nama;
@@ -226,51 +227,27 @@ class _HomeState extends State<Home> {
   String nama;
   String moviename;
 
-  final List<String> newMovies = <String>[
-    'Spiderman',
-    'Parasite',
-    'Men In Black',
-    'Friendzone',
-    'Alladin'
+  List<Movie> newMovies = [
+    movies[0],
+    movies[1],
+    movies[2],
+    movies[3],
+    movies[4],
   ];
-  final List<String> popularMovies = <String>[
-    'Doraemon',
-    'Captain Marvel',
-    'Avengers',
-    'Angel Has Fallen'
+  
+  List<Movie> popularMovies = [
+    movies[5],
+    movies[6],
+    movies[7],
+    movies[8],
   ];
-  final List<int> colorCodes = <int>[600, 500, 400, 300, 200];
 
   _HomeState(this.nama);
 
   int _currentState = 0;
   List carouselImage = [
     Image.asset(
-      'assets/images/alladin.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/angelhasfallen.jpeg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/avenger.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/c_marvel.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/doraemon.jpeg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/friend_zone.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/mib.jpeg',
+      'assets/images/spiderman.jpeg',
       fit: BoxFit.cover,
     ),
     Image.asset(
@@ -278,9 +255,33 @@ class _HomeState extends State<Home> {
       fit: BoxFit.cover,
     ),
     Image.asset(
-      'assets/images/spiderman.jpeg',
+      'assets/images/mib.jpeg',
       fit: BoxFit.cover,
-    )
+    ),
+    Image.asset(
+      'assets/images/friend_zone.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/alladin.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/doraemon.jpeg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/c_marvel.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/avenger.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/angelhasfallen.jpeg',
+      fit: BoxFit.cover,
+    ),
   ];
   Widget _carouselSliderMapBuilder(image) {
     return Builder(
@@ -313,16 +314,44 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _imageCard( index, onPress) {
+  Widget _imageCard( movie, onPress) {
     return Card(
-      child: Column(
-        children: <Widget>[
-          Text(newMovies[index]),
-          TextButton(
-            child: const Text('Press'),
-            onPressed: onPress,
+      child: Row(
+        children: [
+          Container(
+            height: 125,
+            width: 125,
+            child: Image.asset(
+              movie.imageSrc,
+              fit: BoxFit.cover,
+            ),
+            margin: EdgeInsets.only(right: 15),
           ),
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  movie.title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    movie.synopsis,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Text(
+                  movie.genre,
+                  style: TextStyle(fontSize: 16)
+                ),
+              ],
+              crossAxisAlignment: CrossAxisAlignment.start,
+            )
+          )
         ],
+        crossAxisAlignment: CrossAxisAlignment.start,
       )
     );
   }
@@ -330,155 +359,144 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          _carouselHandler(),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              new Container(
-                margin: EdgeInsets.fromLTRB(10, 45, 10, 10),
-                child: Text(
-                  nama,
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              new Container(
-                  margin: EdgeInsets.fromLTRB(10, 48, 5, 10),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: PopupMenuButton<int>(
-                      onSelected: (item) => onSelected(context, item),
-                      itemBuilder: (context) => [
-                        PopupMenuItem<int>(
-                            value: 0,
-                            child: Column(children: [
-                              Padding(
-                                  padding: EdgeInsets.only(right: 25.0),
-                                  child: Text(
-                                    'Home',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ))
-                            ])),
-                        PopupMenuItem<int>(
-                            value: 1,
-                            child: Column(
-                              children: [
-                                Padding(
-                                    padding: EdgeInsets.only(right: 25.0),
-                                    child: Text(
-                                      'About Us',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ))
-                              ],
-                            )),
-                        PopupMenuItem<int>(
-                            value: 2,
-                            child: Column(
-                              children: [
-                                Padding(
-                                    padding: EdgeInsets.only(right: 25.0),
-                                    child: Text(
-                                      'Log Out',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ))
-                              ],
-                            ))
-                      ],
-                      child: Icon(
-                        Icons.dehaze_outlined,
-                        size: 50,
-                      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  new Container(
+                    child: Text(
+                      nama,
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
-                  )),
-            ],
-          ),
-          /* Column(children: <Widget>[
-            ButtonTheme(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)),
-              height: 50,
-              buttonColor: Colors.black,
-              splashColor: Colors.blue,
-              child: Container(
-                  margin: EdgeInsets.fromLTRB(10, 35, 10, 10),
-                  child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MovieDetail(
-                                  namamoviedetail: nama, namamovie: moviename)),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.only(left: 35.0, right: 35.0),
-                        child: Text(
-                          'MOVIE',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  new Container(
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: PopupMenuButton<int>(
+                          onSelected: (item) => onSelected(context, item),
+                          itemBuilder: (context) => [
+                            PopupMenuItem<int>(
+                                value: 0,
+                                child: Column(children: [
+                                  Padding(
+                                      padding: EdgeInsets.only(right: 25.0),
+                                      child: Text(
+                                        'Home',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ))
+                                ])),
+                            PopupMenuItem<int>(
+                                value: 1,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 25.0),
+                                        child: Text(
+                                          'About Us',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ))
+                                  ],
+                                )),
+                            PopupMenuItem<int>(
+                                value: 2,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 25.0),
+                                        child: Text(
+                                          'Log Out',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ))
+                                  ],
+                                ))
+                          ],
+                          child: Icon(
+                            Icons.dehaze_outlined,
+                            size: 50,
+                          ),
                         ),
-                      ))),
-            )
-          ]) */
-          Expanded(
-            flex: 1,
-            child: DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                appBar: TabBar(
-                  indicatorColor: Colors.black,
-                  tabs: [
-                    Tab(
-                      child: Text("New Movies",
-                        style: TextStyle(color: Colors.black)
+                      )),
+                ],
+              ),
+            ),
+            _carouselHandler(),
+            Expanded(
+              flex: 1,
+              child: DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  appBar: TabBar(
+                    indicatorColor: Colors.black,
+                    tabs: [
+                      Tab(
+                        child: Text("New Movies",
+                          style: TextStyle(color: Colors.black)
+                        ),
                       ),
-                    ),
-                    Tab(
-                      child: Text("Popular Movie",
-                        style: TextStyle(color: Colors.black),
+                      Tab(
+                        child: Text("Popular Movie",
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                body: TabBarView(
-                  children: [
-                    ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: newMovies.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return _imageCard(
-                          index,
-                          () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MovieDetail(
-                                      namamoviedetail: nama, namamovie: newMovies[index])),
-                            );
-                          }
-                        );
-                      }
-                    ),
-                    Icon(Icons.directions_bike),
-                  ],
+                    ],
+                  ),
+                  body: TabBarView(
+                    children: [
+                      ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: newMovies.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return _imageCard(
+                            newMovies[index],
+                            () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MovieDetail(
+                                        namamoviedetail: nama, namamovie: newMovies[index].name)),
+                              );
+                            }
+                          );
+                        }
+                      ),
+                      ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: popularMovies.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return _imageCard(
+                            popularMovies[index],
+                            () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MovieDetail(
+                                        namamoviedetail: nama, namamovie: popularMovies[index].name)),
+                              );
+                            }
+                          );
+                        }
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 
