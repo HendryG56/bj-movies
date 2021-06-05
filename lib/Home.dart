@@ -434,7 +434,6 @@ class _HomeState extends State<Home> {
             ),
             _carouselHandler(),
             Expanded(
-              flex: 1,
               child: DefaultTabController(
                 length: 2,
                 child: Scaffold(
@@ -455,45 +454,43 @@ class _HomeState extends State<Home> {
                   ),
                   body: TabBarView(
                     children: [
-                      ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: newMovies.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _imageCard(
-                            newMovies[index],
+                      Column(
+                        children: [
+                          for (var movie in newMovies) 
+                          _imageCard(
+                            movie,
                             () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MovieDetail(
-                                        namamoviedetail: nama, namamovie: newMovies[index].name)),
+                                        namamoviedetail: nama, namamovie: movie.name)),
                               );
                             }
-                          );
-                        }
+                          )
+                        ],
                       ),
-                      ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: popularMovies.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _imageCard(
-                            popularMovies[index],
+                      Column(
+                        children: [
+                          for (var movie in popularMovies) 
+                          _imageCard(
+                            movie,
                             () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MovieDetail(
-                                        namamoviedetail: nama, namamovie: popularMovies[index].name)),
+                                        namamoviedetail: nama, namamovie: movie.name)),
                               );
                             }
-                          );
-                        }
+                          )
+                        ],
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
       )
