@@ -360,7 +360,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             Container(
               padding: EdgeInsets.all(10),
@@ -433,7 +433,8 @@ class _HomeState extends State<Home> {
               ),
             ),
             _carouselHandler(),
-            Expanded(
+            Container(
+              height: 713,
               child: DefaultTabController(
                 length: 2,
                 child: Scaffold(
