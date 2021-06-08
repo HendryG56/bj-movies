@@ -316,42 +316,45 @@ class _HomeState extends State<Home> {
 
   Widget _imageCard( movie, onPress) {
     return Card(
-      child: Row(
-        children: [
-          Container(
-            height: 125,
-            width: 125,
-            child: Image.asset(
-              movie.imageSrc,
-              fit: BoxFit.cover,
+      child: InkWell(
+        onTap: onPress,
+        child: Row(
+          children: [
+            Container(
+              height: 125,
+              width: 125,
+              child: Image.asset(
+                movie.imageSrc,
+                fit: BoxFit.cover,
+              ),
+              margin: EdgeInsets.only(right: 15),
             ),
-            margin: EdgeInsets.only(right: 15),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Text(
-                  movie.title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    movie.synopsis,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
+            Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    movie.title,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                ),
-                Text(
-                  movie.genre,
-                  style: TextStyle(fontSize: 16)
-                ),
-              ],
-              crossAxisAlignment: CrossAxisAlignment.start,
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      movie.synopsis,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    movie.genre,
+                    style: TextStyle(fontSize: 16)
+                  ),
+                ],
+                crossAxisAlignment: CrossAxisAlignment.start,
+              )
             )
-          )
-        ],
-        crossAxisAlignment: CrossAxisAlignment.start,
+          ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+        ),
       )
     );
   }
