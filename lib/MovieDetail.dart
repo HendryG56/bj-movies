@@ -141,6 +141,16 @@ class _MovieDetail extends State<MovieDetail> {
                       ],
                     ),
                     new Container(
+                      child: Column(
+                        children: [
+                            Image.asset(imgsrc
+                          ,width: 300.0,
+                          height: 300.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Container(
                         margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
                         child: Row(
                           children: [
