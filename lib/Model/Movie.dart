@@ -21,7 +21,7 @@ List<Movie> movies= [
   ),
   Movie(
     "assets/images/mib.jpeg",
-    "MIB",
+    "Men In Black",
     "Men In Black",
     "Agent M, a probationary member of the MIB, teams up with Agent H and uncovers a sinister plot that reveals a traitor in the organisation aiding an alien invasion",
     "Action/Sci-fi"
