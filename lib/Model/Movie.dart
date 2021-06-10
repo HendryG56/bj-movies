@@ -1,11 +1,13 @@
 class Movie {
+  int id;
   String imageSrc, name, title, synopsis, genre;
 
-  Movie(this.imageSrc, this.name, this.title, this.synopsis, this.genre);
+  Movie(this. id, this.imageSrc, this.name, this.title, this.synopsis, this.genre);
 }
 
 List<Movie> movies= [
   Movie(
+    0,
     "assets/images/spiderman.jpeg",
     "Spiderman",
     "Spiderman",
@@ -13,6 +15,7 @@ List<Movie> movies= [
     "Action/Adventure"
   ),
   Movie(
+    1,
     "assets/images/parasite.jpeg",
     "Parasite",
     "Parasite",
@@ -20,13 +23,15 @@ List<Movie> movies= [
     "Thriller/Comedy"
   ),
   Movie(
+    2,
     "assets/images/mib.jpeg",
-    "Men In Black",
+    "MIB",
     "Men In Black",
     "Agent M, a probationary member of the MIB, teams up with Agent H and uncovers a sinister plot that reveals a traitor in the organisation aiding an alien invasion",
     "Action/Sci-fi"
   ),
   Movie(
+    3,
     "assets/images/friend_zone.jpg",
     "Friendzone",
     "Friend Zone",
@@ -34,6 +39,7 @@ List<Movie> movies= [
     "Romance/Drama"
   ),
   Movie(
+    4,
     "assets/images/alladin.jpg",
     "Alladin",
     "Alladin",
@@ -41,6 +47,7 @@ List<Movie> movies= [
     "Family/Musical"
   ),
   Movie(
+    5,
     "assets/images/doraemon.jpeg",
     "Doraemon",
     "Doraemon",
@@ -48,6 +55,7 @@ List<Movie> movies= [
     "Sci-fi/Anime"
   ),
   Movie(
+    6,
     "assets/images/c_marvel.jpg",
     "Captain Marvel",
     "Captain Marvel",
@@ -55,6 +63,7 @@ List<Movie> movies= [
     "Sci-fi/Anime"
   ),
   Movie(
+    7,
     "assets/images/avenger.jpg",
     "Avengers",
     "Avengers",
@@ -62,6 +71,7 @@ List<Movie> movies= [
     "Action/Sci-fi"
   ),
   Movie(
+    8,
     "assets/images/angelhasfallen.jpeg",
     "Angel Has Fallen",
     "Angel Has Fallen",

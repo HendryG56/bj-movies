@@ -468,7 +468,7 @@ class _HomeState extends State<Home> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MovieDetail(
-                                        namamoviedetail: nama, namamovie: movie.name)),
+                                        namamoviedetail: nama, movieId: movie.id)),
                               );
                             }
                           )
@@ -484,7 +484,7 @@ class _HomeState extends State<Home> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MovieDetail(
-                                        namamoviedetail: nama, namamovie: movie.name)),
+                                        namamoviedetail: nama, movieId: movie.id)),
                               );
                             }
                           )
