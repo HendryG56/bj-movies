@@ -303,6 +303,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: Column(
         children: [
+          Text(
+            'Movie',
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           _carouselHandler(),
           SizedBox(
             height: 20.0,
