@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:projectapp/Home.dart';
-import 'package:projectapp/Login.dart';
+import 'Model/Movie.dart';
 
 class MovieDetail extends StatefulWidget {
   String namamoviedetail;
   String namamovie;
-  MovieDetail({this.namamoviedetail, this.namamovie});
+  int movieId;
+  MovieDetail({this.namamoviedetail, this.movieId});
 
   @override
-  _MovieDetail createState() => _MovieDetail(namamoviedetail, namamovie);
+  _MovieDetail createState() => _MovieDetail(namamoviedetail, movieId);
 }
 
 class _MovieDetail extends State<MovieDetail> {
   String namamoviedetail;
   String namamovie;
-  String title;
-  String imgsrc;
-  String name;
-  String genre;
-  String sypnosis;
-  int cek = 0;
-  _MovieDetail(this.namamoviedetail, this.namamovie);
+  int movieId;
+
+  _MovieDetail(this.namamoviedetail, this.movieId);
 
   TextEditingController reviews = TextEditingController();
 
@@ -28,70 +25,8 @@ class _MovieDetail extends State<MovieDetail> {
 
   @override
   Widget build(BuildContext context) {
-    if (namamovie == "Spiderman") {
-      title = "Spiderman";
-      imgsrc = "assets/images/spiderman.jpeg";
-      name = "Spiderman";
-      genre = "Action/Adventure";
-      sypnosis =
-          "Peter Parker, the beloved super hero Spider-Man, faces four destructive elemental monsters while on holiday in Europe. Soon, he receives help from Mysterio, a fellow hero with mysterious origins";
-    } else if (namamovie == "Parasite") {
-      title = "Parasite";
-      imgsrc = "assets/images/parasite.jpeg";
-      name = "Parasite";
-      genre = "Thriller/Comedy";
-      sypnosis =
-          "The struggling Kim family sees an opportunity when the son stars working for the wealthy Park family. Soon, all of them find a way to work within the same household and start living a parasitic life";
-    } else if (namamovie == "Men In Black") {
-      title = "Men In Black";
-      imgsrc = "assets/images/mib.jpeg";
-      name = "MIB";
-      genre = "Action/Sci-fi";
-      sypnosis =
-          "Agent M, a probationary member of the MIB, teams up with Agent H and uncovers a sinister plot that reveals a traitor in the organisation aiding an alien invasion";
-    } else if (namamovie == "Friendzone") {
-      title = "Friendzone";
-      imgsrc = "assets/images/friend_zone.jpg";
-      name = "Friend Zone";
-      genre = "Romance/Drama";
-      sypnosis =
-          "In this world, there are many people who seem to be wandering along a relationship on the border of friends and lovers. This borderline is also commonly known as the friend zone and then two friends start to have romantic feelings for each other";
-    } else if (namamovie == "Alladin") {
-      title = "Alladin";
-      imgsrc = "assets/images/alladin.jpg";
-      name = "Alladin";
-      genre = "Family/Musical";
-      sypnosis =
-          "Alladin is a loveable street urchin who meets Princess Jasmine, the beautiful daughter of the sultan of Agrabah. While visiting her exotic palace, Alladin stumbles upon a magic oil lampt that ...";
-    } else if (namamovie == "Doraemon") {
-      title = "Doraemon";
-      imgsrc = "assets/images/doraemon.jpeg";
-      name = "Doraemon";
-      genre = "Sci-fi/Anime";
-      sypnosis =
-          "Nobita saw a moon turned yellow last night and told his class about it but they think it's funny. Doraemon gives him the 'History Explorers Club Badge' and discovers there's life on the moon. Until a new student changed him forever";
-    } else if (namamovie == "Captain Marvel") {
-      title = "Captain Marvel";
-      imgsrc = "assets/images/c_marvel.jpg";
-      name = "Captain Marvel";
-      genre = "Action/Sci-fi";
-      sypnosis =
-          "Amidst a mission, Vers, a Kree warrior, gets separated from her team and is stranded on Earth. However, her life takes an unusual turn after she teams up with Fury, a S.H.I.E.L.D agent";
-    } else if (namamovie == "Avengers") {
-      title = "Avengers";
-      imgsrc = "assets/images/avenger.jpg";
-      name = "Avengers";
-      genre = "Action/Sci-fi";
-      sypnosis =
-          "After Thanos, an intergalatic warlod, disintegrates half of the universe, the Avengers must reunite and assemble again to reinvigorate their trounced allies and restore balance";
-    } else {
-      title = "Angel Has Fallen";
-      imgsrc = "assets/images/angelhasfallen.jpeg";
-      name = "Angel Has Fallen";
-      genre = "Action/Thriller";
-      sypnosis =
-          "Mike Banning is framed for the attempted assasination of the President and must evade his own agency and the FBI as he tries to uncover the real threat";
-    }
+
+    Movie movie = movies[movieId];
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -130,7 +65,7 @@ class _MovieDetail extends State<MovieDetail> {
                             child: Column(
                               children: [
                                 new Text(
-                                  title,
+                                  movie.title,
                                   style: TextStyle(
                                       fontSize: 30,
                                       color: Colors.black,
@@ -141,11 +76,22 @@ class _MovieDetail extends State<MovieDetail> {
                       ],
                     ),
                     new Container(
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            movie.imageSrc,
+                            width: 300.0,
+                            height: 300.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Container(
                         margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
                         child: Row(
                           children: [
                             new Text(
-                              name,
+                              movie.name,
                               style: TextStyle(
                                   fontSize: 30,
                                   color: Colors.black,
@@ -158,7 +104,7 @@ class _MovieDetail extends State<MovieDetail> {
                         child: Row(
                           children: [
                             new Text(
-                              genre,
+                              movie.genre,
                               style:
                                   TextStyle(fontSize: 18, color: Colors.black),
                             ),
@@ -182,7 +128,7 @@ class _MovieDetail extends State<MovieDetail> {
                         child: Column(
                           children: [
                             new Text(
-                              sypnosis,
+                              movie.synopsis,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.black),
                             ),

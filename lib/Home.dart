@@ -5,6 +5,7 @@ import 'package:projectapp/Login.dart';
 import 'package:projectapp/MovieDetail.dart';
 import 'MovieDetail.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'Model/Movie.dart';
 
 // class Home_ extends StatelessWidget {
 //   String nama;
@@ -226,36 +227,27 @@ class _HomeState extends State<Home> {
   String nama;
   String moviename;
 
+  List<Movie> newMovies = [
+    movies[0],
+    movies[1],
+    movies[2],
+    movies[3],
+    movies[4],
+  ];
+
+  List<Movie> popularMovies = [
+    movies[5],
+    movies[6],
+    movies[7],
+    movies[8],
+  ];
+
   _HomeState(this.nama);
 
   int _currentState = 0;
   List carouselImage = [
     Image.asset(
-      'assets/images/alladin.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/angelhasfallen.jpeg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/avenger.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/c_marvel.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/doraemon.jpeg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/friend_zone.jpg',
-      fit: BoxFit.cover,
-    ),
-    Image.asset(
-      'assets/images/mib.jpeg',
+      'assets/images/spiderman.jpeg',
       fit: BoxFit.cover,
     ),
     Image.asset(
@@ -263,9 +255,33 @@ class _HomeState extends State<Home> {
       fit: BoxFit.cover,
     ),
     Image.asset(
-      'assets/images/spiderman.jpeg',
+      'assets/images/mib.jpeg',
       fit: BoxFit.cover,
-    )
+    ),
+    Image.asset(
+      'assets/images/friend_zone.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/alladin.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/doraemon.jpeg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/c_marvel.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/avenger.jpg',
+      fit: BoxFit.cover,
+    ),
+    Image.asset(
+      'assets/images/angelhasfallen.jpeg',
+      fit: BoxFit.cover,
+    ),
   ];
   Widget _carouselSliderMapBuilder(image) {
     return Builder(
@@ -298,38 +314,68 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _imageCard(movie, onPress) {
+    return Card(
+        child: InkWell(
+      onTap: onPress,
+      child: Row(
+        children: [
+          Container(
+            height: 125,
+            width: 125,
+            child: Image.asset(
+              movie.imageSrc,
+              fit: BoxFit.cover,
+            ),
+            margin: EdgeInsets.only(right: 15),
+          ),
+          Expanded(
+              child: Column(
+            children: [
+              Text(
+                movie.title,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  movie.synopsis,
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Text(movie.genre, style: TextStyle(fontSize: 16)),
+            ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+          ))
+        ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Text(
-            'Movie',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          _carouselHandler(),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              new Container(
-                margin: EdgeInsets.fromLTRB(10, 45, 10, 10),
-                child: Text(
-                  nama,
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              new Container(
-                  margin: EdgeInsets.fromLTRB(10, 48, 5, 10),
-                  child: Align(
+      body: SafeArea(
+        child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  new Container(
+                    child: Text(
+                      nama,
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  new Container(
+                      child: Align(
                     alignment: Alignment.topRight,
                     child: PopupMenuButton<int>(
                       onSelected: (item) => onSelected(context, item),
@@ -381,36 +427,73 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   )),
-            ],
-          ),
-          Column(children: <Widget>[
-            ButtonTheme(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)),
-              height: 50,
-              buttonColor: Colors.black,
-              splashColor: Colors.blue,
-              child: Container(
-                  margin: EdgeInsets.fromLTRB(10, 35, 10, 10),
-                  child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MovieDetail(
-                                  namamoviedetail: nama, namamovie: moviename)),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.only(left: 35.0, right: 35.0),
+                ],
+              ),
+            ),
+            Text(
+              'Movie',
+              style: TextStyle(
+                fontSize: 32,
+              ),
+            ),
+            _carouselHandler(),
+            Container(
+              height: 713,
+              child: DefaultTabController(
+                length: 2,
+                child: Scaffold(
+                  appBar: TabBar(
+                    indicatorColor: Colors.black,
+                    tabs: [
+                      Tab(
+                        child: Text("New Movies",
+                            style: TextStyle(color: Colors.black)),
+                      ),
+                      Tab(
                         child: Text(
-                          'MOVIE',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          "Popular Movie",
+                          style: TextStyle(color: Colors.black),
                         ),
-                      ))),
+                      ),
+                    ],
+                  ),
+                  body: TabBarView(
+                    children: [
+                      Column(
+                        children: [
+                          for (var movie in newMovies)
+                            _imageCard(movie, () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MovieDetail(
+                                        namamoviedetail: nama,
+                                        movieId: movie.id)),
+                              );
+                            })
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          for (var movie in popularMovies)
+                            _imageCard(movie, () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MovieDetail(
+                                        namamoviedetail: nama,
+                                        movieId: movie.id)),
+                              );
+                            })
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             )
-          ])
-        ],
+          ],
+        ),
       ),
     );
   }
