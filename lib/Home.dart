@@ -160,20 +160,24 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   new Container(
-                    child: Text(
-                      nama,
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  new Container(
                       child: Align(
                     alignment: Alignment.topRight,
                     child: PopupMenuButton<int>(
                       onSelected: (item) => onSelected(context, item),
                       itemBuilder: (context) => [
+                      PopupMenuItem<int>(
+                            value: 0,
+                            child: Column(children: [
+                              Padding(
+                                  padding: EdgeInsets.only(right: 25.0),
+                                  child: Text(
+                                      nama,
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ))
+                            ])),
                         PopupMenuItem<int>(
                             value: 0,
                             child: Column(children: [
